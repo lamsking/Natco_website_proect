@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Authentification</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/css/index.css">
+  </head>
+  <body>
+    <% if(notification!=undefined){%>
+      <div class="container" style="margin-top:10px;margin-bottom:10px;font-size:10px;">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-success alert-dismissable">
+             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <%= notification %>
+           </div>
+          </div>
+       </div>
+      </div>
+   <%}; %>
+    <div class="container login-container">
+          <div class="row">
+            <div class="col-md-6 ads">
+              <img class="img-responsive logo" src="/images/logo.png" width="150" height="150" alt="" style="margin-top:50px;">
+            </div>
+            <div class="col-md-6 login-form">
+              <h3>Creation Utilisateur</h3>
+              <form method="post" action="/signup">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="nom" placeholder="Nom">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="prenom" placeholder="Prenom">
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" name="email" placeholder="Login">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Mot de Passe">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="confirm" placeholder="Confirmation Mot de Passe">
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-default btn-lg btn-block">Enregistrer</button>
+                </div>
+                <div class="form-group forget-password">
+                    <a href="/">Retour au Site</a> | <a href="/register">S'Inscrire</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!-- Include head -->
+<% include ../head %>
+<!-- breadcrumb -->
+<ul class="breadcrumb" style="background:#e2e2e2; color:#333;margin-left:250px;margin-top:10px;">
+    <li><a href="/administration">Accueil</a></li>
+    <li class="active"><a href="/utilisateurs/1">Gestion des Utilisateurs</a></li>
+    <li class="active">Modifier Information Utilisateur</li>
+</ul>
+<!-- Liste des utilisateurs -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 card">
+      <% if(notification!=undefined){%>
+        <div class="alert alert-danger alert-dismissable">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <%= notification %>
+        </div>
+      <%}; %>
+       <div class="row" style="margin-top:50px;background:#FFF;padding-top:100px;padding-bottom:50px;">
+         <div class="col-sm-12">
+           <h4>EDITER MODIFICATION UTILISATEUR</h4>
+           <hr>
+         </div>
+         <div class="col-sm-4">
+           <form method="post" action="/utilisateur/<%= user._id %>">
+             <input type="hidden" name="id" value="<%= user._id %>">
+             <div class="form-group">
+               <input type="text" class="form-control" name="nom" value="<%= user.nom %>" required />
+             </div>
+             <div class="form-group">
+               <input type="text" class="form-control" name="prenom" value="<%= user.prenom %>" required />
+             </div>
+             <div class="form-group">
+               <input type="email" class="form-control" name="email" value="<%= user.email %>" required />
+             </div>
+
+             <div class="form-group">
+               <select class="form-control" name="statut">
+                 <% if(user.statut ==='User'){%>
+                  <option value="User" selected>Utilisateur</option>
+                  <option value="Admin">Administrateur</option>
+                  <option value="Super Admin">Super Administrateur</option>
+                  <option value="Chef de Projet">Chef de Projet</option>
+                <%}; %>
+                <% if(user.statut ==='Admin'){%>
+                 <option value="Admin" selected>Administrateur</option>
+                 <option value="User">Utilisateur</option>
+                 <option value="Super Admin">Super Administrateur</option>
+                 <option value="Chef de Projet">Chef de Projet</option>
+                <%}; %>
+                <% if(user.statut ==='Super Admin'){%>
+                 <option value="Super Admin" selected>Super Administrateur</option>
+                 <option value="User">Utilisateur</option>
+                 <option value="Admin">Administrateur</option>
+                 <option value="Chef de Projet">Chef de Projet</option>
+               <%}; %>
+               <% if(user.statut ==='Chef de Projet'){%>
+                <option value="Chef de Projet" selected>Chef de Projet</option>
+                <option value="User">Utilisateur</option>
+                <option value="Admin">Administrateur</option>
+                <option value="Super Admin"> Super Administrateur</option>
+              <%}; %>
+               </select>
+             </div>
+             <div class="form-group">
+               <select class="form-control" name="profil">
+                 <% if(user.profil ==='Enseignant/Chercheur'){%>
+                   <option value="Enseignant/Chercheur" selected>Enseignant/Chercheur</option>
+                   <option value="Etudiant">Etudiant</option>
+                   <option value="Autre">Autre</option>
+                <%}; %>
+                <% if(user.profil ==='Etudiant'){%>
+                  <option value="Etudiant" selected>Etudiant</option>
+                  <option value="Enseignant/Chercheur">Enseignant/Chercheur</option>
+                  <option value="Autre">Autre</option>
+                <%}; %>
+                <% if(user.profil ==='Autre'){%>
+                  <option value="Autre" selected>Autre</option>
+                  <option value="Enseignant/Chercheur">Enseignant/Chercheur</option>
+                  <option value="Etudiant">Etudiant</option>
+               <%}; %>
+
+               </select>
+             </div>
+             <div class="form-group">
+               <select class="form-control" name="projet">
+                 <% projects.forEach(function(project) { %>
+                   <% if(user.projet === project.nom){%>
+                     <option value="<%= project.nom %>" selected>Projet : <%= project.nom %></option>
+                  <%}; %>
+                     <option value="<%= project.nom %>">Projet : <%= project.nom %></option>
+                 <% }); %>
+               </select>
+             </div>
+             <div class="form-group">
+               <select class="form-control" name="privilege">
+                 <% if(user.privilege ==='Lecture'){%>
+                   <option value="Lecture">Lecture</option>
+                   <option value="Ecriture">Ecriture</option>
+                   <option value="Suppression">Suppression</option>
+                   <option value="Tous">Tous les droits</option>
+                <%}; %>
+                <% if(user.privilege ==='Ecriture'){%>
+                  <option value="Lecture">Lecture</option>
+                  <option value="Ecriture" selected>Ecriture</option>
+                  <option value="Suppression">Suppression</option>
+                  <option value="Tous">Tous les droits</option>
+                <%}; %>
+                <% if(user.privilege ==='Suppression'){%>
+                  <option value="Lecture">Lecture</option>
+                  <option value="Ecriture">Ecriture</option>
+                  <option value="Suppression" selected>Suppression</option>
+                  <option value="Tous">Tous les droits</option>
+               <%}; %>
+               <% if(user.privilege ==='Tous'){%>
+                 <option value="Lecture">Lecture</option>
+                 <option value="Ecriture">Ecriture</option>
+                 <option value="Suppression">Suppression</option>
+                 <option value="Tous" selected>Tous les droits</option>
+              <%}; %>
+
+               </select>
+             </div>
+
+             <div class="form-group">
+               <button type="submit" class="btn btn-default btn-lg btn-block">Modifier</button>
+             </div>
+
+           </form>
+         </div>
+         <div class="col-sm-8">
+           <p style="font-size:15px;">
+             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+           </p>
+         </div>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="content-sm container text-center">
+    <p>Tous Droits reserves ... <a href="">Numero</a></p>
+</div>
+</body>
+</html>

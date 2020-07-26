@@ -1,0 +1,77 @@
+<!-- Include head -->
+<% include ../head %>
+<!-- breadcrumb -->
+<ul class="breadcrumb" style="background:#e2e2e2; color:#333;margin-left:250px;margin-top:10px;">
+    <li><a href="/administration">Accueil</a></li>
+    <li class="active"><a href="/utilisateurs/1">Gestion des Utilisateurs</a></li>
+    <li class="active">Gestion du profil</li>
+</ul>
+<!-- Liste des utilisateurs -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 card">
+      <% if(notification!=undefined){%>
+        <div class="alert alert-danger alert-dismissable">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <%= notification %>
+        </div>
+      <%}; %>
+       <div class="row" style="margin-top:50px;background:#FFF;padding-top:30px;padding-bottom:50px;">
+         <div class="col-sm-12 text-center">
+           <h4>GESTION DU PROFIL UTILISATEUR</h4>
+           <hr>
+         </div>
+         <div class="col-md-6 img">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q"  alt="" class="img-rounded">
+        <p>
+          <h4>MODIFICATION DE L'AVATAR</h4>
+          <hr>
+          <form class="" action="" method="post" enctype="multipart/form-data">
+            <div class="form-group col-sm-9">
+              <input type="file" name="avatar" class="form-control" required>
+            </div>
+
+            <div class="form-group col-sm-3">
+              <input type="submit" class="btn btn-default" value="Upload Photo">
+            </div>
+
+          </form>
+        </p>
+      </div>
+      <div class="col-md-6 details">
+        <blockquote>
+          <h5><%= user.prenom %> <%= user.nom %></h5>
+          <small><cite title="Source Title"><%= user.profil %>, <%= user.statut %>  <i class="icon-map-marker"></i></cite></small>
+        </blockquote>
+        <p>
+          <%= user.email %> <br>
+        </p>
+        <p>
+          <h4>MODIFICATION DU MOT DE PASSE</h4>
+          <hr>
+          <form class="" action="" method="post">
+            <div class="form-group">
+              <input type="text" name="password" class="form-control" placeholder="Ancien mot de passe" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="newpassword" class="form-control" placeholder="Nouveau mot de passe" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="cfpassword" class="form-control" placeholder="Confirmer mot de passe" required>
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-default" value="Modifier mot de passe">
+            </div>
+
+          </form>
+        </p>
+      </div>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="content-sm container text-center">
+    <p>Tous Droits reserves ... <a href="">Numero</a></p>
+</div>
+</body>
+</html>

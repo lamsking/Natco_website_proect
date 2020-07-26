@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form class="" action="index.html" method="post">
+      <input type="file" name="fichiers[]" id="file" multiple>
+    </form>
+
+    <script >
+       class _DataTransfer {
+         constructor() {
+           return new ClipboardEvent("").clipboardData || new DataTransfer();
+         }
+       }
+       
+       const input = document.getElementById("file");
+       input.addEventListener("change", function(e){
+         var data = input.files;
+         console.log(typeof data);
+         console.log(data);
+         var ts = new Date();
+         ts.toString()
+         var f = new File([""], "test.jpg", {type: "image/jpeg", lastModified: ts});
+         console.log(f);
+         console.log(typeof f);
+         const dt = new _DataTransfer();
+         dt.items.add(f);
+
+         var t = new File([""], "test1.jpg", {type: "image/jpeg", lastModified: ts});
+         dt.items.add(t);
+         console.log(dt);
+         input.files = dt.files;
+         console.log(input.files)
+       });
+
+    </script>
+  </body>
+</html>

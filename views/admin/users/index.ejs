@@ -1,0 +1,103 @@
+<!-- Include head -->
+<% include ../head %>
+<!-- breadcrumb -->
+<ul class="breadcrumb" style="background:#e2e2e2; color:#333;margin-left:250px;margin-top:10px;">
+    <li><a href="/administration">Accueil</a></li>
+    <li class="active">Gestion des Utilisateurs</li>
+    <li class="active">Liste</li>
+</ul>
+<!-- Liste des utilisateurs -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 card">
+       <div class="row">
+         <% if(notification!=undefined){%>
+            <div class="alert alert-danger alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                  <%= notification %>
+            </div>
+        <%}; %>
+         <div class="col-sm-3 text-center">
+           <h5>Liste des Utilisateurs</h5>
+         </div>
+         <div class="col-sm-7">
+           <form action="/utilisateurs/search/1" method="post">
+             <input type="text" class="form-control" name="search_input" placeholder="Rechercher un utilisateur par son nom" style="font-size:10px;">
+           </form>
+         </div>
+         <div class="col-sm-2" style="margin-top:4px;">
+           <a href="/utilisateur/nouveau" class="btn btn-default" style="font-size:10px;"> <i class="fa fa-plus"></i> Nouvel Utilisateur</a>
+         </div>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="bg-color-sky-light">
+    <div class="content-md container">
+        <div class="row" id="utilisateurs">
+          <% utilisateurs.forEach(function(utilisateur) { %>
+               <div class="col-md-3 md-margin-b-30">
+                   <!-- Pricing List v4 -->
+                   <div class="pricing-list-v4 radius-10">
+                       <div class="pricing-list-v4-header">
+                           <h4 class="pricing-list-v4-title"><i class="fa fa-user" style="font-size:80px;"></i></h4>
+                           <span class="pricing-list-v4-subtitle" style="font-size:10px;"><%= utilisateur.prenom %> <%= utilisateur.nom %></span>
+                           <span class="pricing-list-v4-subtitle"><%= utilisateur.statut %></span>
+                           <span class="pricing-list-v4-subtitle" style="font-size:10px;"><a href="/utilisateur/<%= utilisateur._id %>"><i class="fa fa-pencil"></i></a> <a href="/utilisateur/delete/<%= utilisateur._id %>"><i class="fa fa-trash"></i></a> <a href="/utilisateur/profil/<%= utilisateur._id %>"><i class="fa fa-server"></i></a></span>
+                       </div>
+                           <div class="center-block" style="padding-botton:20px;">
+                               <i class="fa fa-folder"></i>
+                           </div>
+                       </div>
+                   </div>
+          <% }); %>
+
+                <!-- End Pricing List v4 -->
+            </div>
+            <div class="row">
+              <div class="col-sm-12 ">
+                  <% if (pages > 0) { %>
+                 <ul class="pagination pull-right">
+                     <% if (current == 1) { %>
+                         <li class="disabled"><a>«</a></li>
+                     <% } else { %>
+                         <li><a href="/utilisateurs/1">«</a></li>
+                     <% } %>
+                     <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                     <% if (i !== 1) { %>
+                         <li class="disabled"><a>...</a></li>
+                     <% } %>
+                     <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                         <% if (i == current) { %>
+                             <li class="active"><a><%= i %></a></li>
+                         <% } else { %>
+                             <li><a href="/utilisateurs/<%= i %>"><%= i %></a></li>
+                         <% } %>
+                         <% if (i == Number(current) + 4 && i < pages) { %>
+                             <li class="disabled"><a>...</a></li>
+                         <% } %>
+                     <% } %>
+                     <% if (current == pages) { %>
+                         <li class="disabled"><a>»</a></li>
+                     <% } else { %>
+                         <li><a href="/utilisateurs/<%= pages %>">»</a></li>
+                     <% } %>
+                 </ul>
+             <% } %>
+              </div>
+            </div>
+        </div>
+        <!--// end row -->
+    </div>
+
+<!-- End Pricing List v4 -->
+
+<!-- Copyright -->
+<div class="content-sm container text-center">
+    <p>Tous Droits reserves ... <a href="">Numero</a></p>
+</div>
+<!-- End Copyright -->
+<!--========== END PAGE CONTENT ==========-->
+
+</body>
+</html>
